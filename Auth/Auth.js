@@ -24,6 +24,7 @@ exports.register = async (req, res, next) => {
   }
 
   exports.login = async (req, res, next) => {
+    const { username, password } = req.body
     try {
       const user = await User.findOne({ username, password })
       if (!user) {
@@ -43,4 +44,17 @@ exports.register = async (req, res, next) => {
         error: error.message,
       })
     }
+  }
+  exports.deleteUser = async (req, res, next) => {
+    const { id } = req.body
+    await User.findById(id)
+      .then(user => user.remove())
+      .then(user =>
+        res.status(201).json({ message: "User successfully deleted", user })
+      )
+      .catch(error =>
+        res
+          .status(400)
+          .json({ message: "An error occurred", error: error.message })
+      )
   }
