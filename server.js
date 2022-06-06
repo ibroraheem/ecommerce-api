@@ -7,6 +7,9 @@ dotenv.config();
 connectDB();
 app.use(express.json())
 app.use(cors());
+app.get('/', (req, res) => {
+    res.status(200).send('Hello World')
+})
 app.use("/api/", require("./routes/product-route"))
 app.use("/api/auth", require("./routes/auth-route"))
 
