@@ -1,4 +1,4 @@
-const User = require("../model/User")
+const User = require("../model/user")
 
 exports.displayUsers = async (req, res, next) => {
   await User.find()
