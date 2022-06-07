@@ -1,5 +1,8 @@
 const product = require('../model/product')
+
+
 exports.addProduct = async (req, res, next) => {
+
     const { name, price, description, image } = req.body
     if (name && price && description && image) {
         await product.create({
@@ -20,6 +23,8 @@ exports.addProduct = async (req, res, next) => {
         })
     }
 }
+
+
 exports.getAllProducts = async (req, res, next) => {
     await product.find().then(products =>
         res.status(200).json({
@@ -68,4 +73,3 @@ exports.deleteProduct = async (req, res, next) => {
         })
     )
 }
- 
